@@ -1,24 +1,24 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Sidebar from '@/components/Sidebar';
-import Header from '@/components/Header';
-import MainDashboard from '@/components/MainDashboard';
-import RightPanel from '@/components/RightPanel';
-import ChatAssistant from '@/components/ChatAssistant';
+import Sidebar from '@/components/layout/Sidebar';
+import Header from '@/components/layout/Header';
+import MainDashboard from '@/components/views/MainDashboard';
+import RightPanel from '@/components/layout/RightPanel';
+import ChatAssistant from '@/components/layout/ChatAssistant';
 
 // View imports
-import AssistantView from '@/components/AssistantView';
-import SchemesView from '@/components/SchemesView';
-import ComplaintsView from '@/components/ComplaintsView';
-import DocumentsView from '@/components/DocumentsView';
-import ApplicationsView from '@/components/ApplicationsView';
+import AssistantView from '@/components/views/AssistantView';
+import SchemesView from '@/components/views/SchemesView';
+import ComplaintsView from '@/components/views/ComplaintsView';
+import DocumentsView from '@/components/views/DocumentsView';
+import ApplicationsView from '@/components/views/ApplicationsView';
 
 // Settings & Utilities imports
-import LanguageView from '@/components/LanguageView';
-import HelpView from '@/components/HelpView';
-import SettingsView from '@/components/SettingsView';
-import NotificationsView from '@/components/NotificationsView';
+import LanguageView from '@/components/views/LanguageView';
+import HelpView from '@/components/views/HelpView';
+import SettingsView from '@/components/views/SettingsView';
+import NotificationsView from '@/components/views/NotificationsView';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('home');
@@ -450,6 +450,7 @@ export default function Home() {
           notificationCount={notifications.length}
           currentLanguage={language}
           onLanguageClick={() => setActiveTab('language')}
+          onLanguageChange={handleLanguageChange}
           onNotificationClick={() => setActiveTab('notifications')}
         />
 

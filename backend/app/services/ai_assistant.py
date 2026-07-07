@@ -1,9 +1,61 @@
+import os
+import json
+import urllib.request
 from datetime import datetime
+
+# Helper to load .env variables manually to avoid dependencies
+def load_env():
+    # Look for .env in the parent folder of 'app' (root of backend directory)
+    current_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    env_path = os.path.join(current_dir, ".env")
+    if os.path.exists(env_path):
+        with open(env_path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("#") and "=" in line:
+                    k, v = line.split("=", 1)
+                    os.environ[k.strip()] = v.strip()
+
+# Run load_env when service is imported
+load_env()
 
 def generate_chat_reply(message: str) -> dict:
     user_msg = message.lower()
+    api_key = os.environ.get("GEMINI_API_KEY")
     
-    # Generate intelligent responses for government queries
+    # Check if Gemini API key is valid (not empty and not the placeholder)
+    if api_key and api_key != "your_api_key_here":
+        try:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
+            headers = {"Content-Type": "application/json"}
+            body = {
+                "contents": [{"parts": [{"text": message}]}],
+                "systemInstruction": {
+                    "parts": [{
+                        "text": "You are JanSetu, a friendly and helpful AI Government Assistant designed to guide citizens (specifically Radha Devi, a citizen living in Bangalore, Karnataka) through welfare schemes, certificate applications, complaints filing, and document locker verification. Keep your answers concise, structured, and friendly. Prefer markdown formatting for lists."
+                    }]
+                }
+            }
+            
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(body).encode("utf-8"),
+                headers=headers,
+                method="POST"
+            )
+            
+            # Timeout of 8 seconds to keep chat prompt snappy
+            with urllib.request.urlopen(req, timeout=8) as response:
+                res_body = json.loads(response.read().decode("utf-8"))
+                reply = res_body["candidates"][0]["content"]["parts"][0]["text"]
+                return {
+                    "reply": reply,
+                    "timestamp": datetime.now().strftime("%H:%M")
+                }
+        except Exception as e:
+            print(f"Gemini API request failed ({e}), falling back to local database routing rules.")
+
+    # FALLBACK Local Mock Rules
     if "caste" in user_msg:
         reply = (
             "To apply for a **Caste Certificate**, you need the following documents:\n"

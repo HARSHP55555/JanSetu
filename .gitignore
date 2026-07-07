@@ -1,0 +1,155 @@
+# ======================================================
+# JanSetu Dashboard
+# FastAPI + Next.js + React + Tailwind CSS
+# ======================================================
+
+#############################
+# OS Files
+#############################
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+#############################
+# IDEs
+#############################
+.idea/
+.vscode/
+*.code-workspace
+
+#############################
+# Python
+#############################
+__pycache__/
+*.py[cod]
+*$py.class
+
+*.so
+*.egg
+*.egg-info/
+.eggs/
+
+build/
+dist/
+pip-wheel-metadata/
+
+#############################
+# Python Virtual Environments
+#############################
+.venv/
+venv/
+env/
+ENV/
+
+#############################
+# Python Tooling
+#############################
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.coverage
+.coverage.*
+htmlcov/
+
+#############################
+# Jupyter
+#############################
+.ipynb_checkpoints/
+
+#############################
+# Environment Variables
+#############################
+.env
+.env.*
+!.env.example
+
+backend/.env
+frontend/.env
+frontend/.env.local
+frontend/.env.development.local
+frontend/.env.production.local
+frontend/.env.test.local
+
+#############################
+# Logs
+#############################
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+#############################
+# Node.js
+#############################
+node_modules/
+.npm/
+.pnpm-store/
+
+#############################
+# Next.js
+#############################
+.next/
+out/
+
+#############################
+# Cache
+#############################
+.cache/
+.parcel-cache/
+.turbo/
+
+#############################
+# TypeScript
+#############################
+*.tsbuildinfo
+
+#############################
+# Coverage
+#############################
+coverage/
+
+#############################
+# Temporary Files
+#############################
+tmp/
+temp/
+*.tmp
+*.bak
+*.swp
+*.swo
+
+#############################
+# SQLite (if added later)
+#############################
+*.sqlite3
+*.db
+
+#############################
+# Docker
+#############################
+.docker/
+
+#############################
+# Misc
+#############################
+*.pid
+*.seed
+*.pid.lock
+
+#############################
+# Secrets / Keys
+#############################
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+
+#############################
+# Optional Documentation Build
+#############################
+site/
+docs/_build/
